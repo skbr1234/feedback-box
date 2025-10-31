@@ -1,11 +1,19 @@
 (function() {
-    // Configuration - Replace with your Google Form details
-    const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse';
-    const INPUT_NAME = 'entry.YOUR_ENTRY_ID'; // Replace with actual entry ID
-    
     function createWidget() {
         const container = document.getElementById('feedbackbox-widget');
         if (!container) return;
+        
+        // Get configuration from data attributes
+        const formId = container.dataset.form;
+        const entryId = container.dataset.entry;
+        
+        if (!formId || !entryId) {
+            container.innerHTML = '<div style="color: red; padding: 10px;">Error: Missing data-form or data-entry attributes</div>';
+            return;
+        }
+        
+        const GOOGLE_FORM_URL = `https://docs.google.com/forms/d/e/${formId}/formResponse`;
+        const INPUT_NAME = `entry.${entryId}`;
         
         container.innerHTML = `
             <div style="
@@ -75,6 +83,10 @@
         
         button.disabled = true;
         button.textContent = 'Submitting...';
+        
+        const container = document.getElementById('feedbackbox-widget');
+        const GOOGLE_FORM_URL = `https://docs.google.com/forms/d/e/${container.dataset.form}/formResponse`;
+        const INPUT_NAME = `entry.${container.dataset.entry}`;
         
         const formData = new FormData();
         formData.append(INPUT_NAME, input.value);

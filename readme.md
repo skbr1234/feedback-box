@@ -10,13 +10,11 @@
 6. Find the form action URL (looks like: `https://docs.google.com/forms/d/e/1FAIpQLSe.../formResponse`)
 7. Find the input name (looks like: `entry.123456789`)
 
-## Update FeedbackBox Configuration
+## Setup Your Google Form
 
-Replace these lines in widget.js:
-```javascript
-const GOOGLE_FORM_URL = 'YOUR_ACTUAL_FORM_URL_HERE';
-const INPUT_NAME = 'YOUR_ACTUAL_ENTRY_ID_HERE';
-```
+1. Create a Google Form with one text question
+2. Get your form ID and entry ID from the form source
+3. Use them in the embed code data attributes
 
 ## Testing
 
@@ -28,10 +26,14 @@ const INPUT_NAME = 'YOUR_ACTUAL_ENTRY_ID_HERE';
 ```html
 <!-- Method 1: Script Tag -->
 <script src="path/to/widget.js"></script>
-<div id="feedbackbox-widget"></div>
+<div id="feedbackbox-widget" 
+     data-form="YOUR_FORM_ID" 
+     data-entry="YOUR_ENTRY_ID"></div>
 
 <!-- Method 2: iframe -->
-<iframe src="path/to/widget.html" width="320" height="180"></iframe>
+<iframe src="path/to/widget.html" width="320" height="200"></iframe>
+
+Note: For iframe method, you need to modify widget.html with your form details.
 ```
 
 ## Deployment
